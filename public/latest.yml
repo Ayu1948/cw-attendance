@@ -1,0 +1,8 @@
+version: 3.0.1
+files:
+  - url: cw-attendance-setup-3.0.1.exe
+    sha512: V0SjKEqa04OIJ3y50BWjil/7Upbl6fWWQNes7wpSO1czPCxE3LhU+nYnpHnOFgcj/6q/vomEBYNco2PMnXYXGg==
+    size: 45025561
+path: cw-attendance-setup-3.0.1.exe
+sha512: V0SjKEqa04OIJ3y50BWjil/7Upbl6fWWQNes7wpSO1czPCxE3LhU+nYnpHnOFgcj/6q/vomEBYNco2PMnXYXGg==
+releaseDate: '2021-07-30T09:11:37.879Z'

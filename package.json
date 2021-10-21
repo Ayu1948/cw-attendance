@@ -1,6 +1,6 @@
 {
   "name": "cw-attendance",
-  "version": "0.0.1",
+  "version": "3.0.1",
   "author": "ZHTing <Ayu1948@163.com>",
   "description": "考勤分析工具",
   "license": null,
@@ -14,13 +14,13 @@
     "pack": "npm run pack:main && npm run pack:renderer",
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
-    "postinstall": ""
+    "test": "electron-packager . 'cw' --platform=win32 --arch=x64  --out=./out --asar --app-version=0.0.1"
   },
   "build": {
-    "productName": "cw-attendance",
+    "productName": "考勤小工具",
     "appId": "com.example.yourapp",
     "directories": {
-      "output": "build"
+      "output": "public"
     },
     "files": [
       "dist/electron/**/*"
