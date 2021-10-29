@@ -200,15 +200,15 @@ export default {
             orange = 0,
             grey = 0,
             yellow = 0
-          if (this.excelDataOne[index - 1][10] == '付丹丹') {
-            item.forEach((t, i) => {
-              tmp[i] = that.getClassFu(t, index, i)
-              if (tmp[i] == 'red') red++
-              else if (tmp[i] == 'orange') orange++
-              else if (tmp[i] == 'grey') grey++
-              else if (tmp[i] == 'yellow') yellow++
-            })
-          } else {
+          // if (this.excelDataOne[index - 1][10] == '付丹丹') {
+          //   item.forEach((t, i) => {
+          //     tmp[i] = that.getClassFu(t, index, i)
+          //     if (tmp[i] == 'red') red++
+          //     else if (tmp[i] == 'orange') orange++
+          //     else if (tmp[i] == 'grey') grey++
+          //     else if (tmp[i] == 'yellow') yellow++
+          //   })
+          // } else {
             item.forEach((t, i) => {
               tmp[i] = that.getClass(t, index, i)
               if (tmp[i] == 'red') red++
@@ -216,7 +216,7 @@ export default {
               else if (tmp[i] == 'grey') grey++
               else if (tmp[i] == 'yellow') yellow++
             })
-          }
+          // }
 
           that.newtoOne[index] = {
             name: this.excelDataOne[index - 1][10],
@@ -411,29 +411,33 @@ export default {
       // console.log(arr)
       let tmp2 = pm.split(':')
       let amLastTime = 9
-      if (Number(tmp1[0]) >= 0 && Number(tmp1[0]) < 3) {
+      if (Number(tmp1[0]) >= 0 && Number(tmp1[0]) < 3) { // 前一天加班到第二天凌晨 上班时间改至11点
         am = arr[1]
         tmp1 = am.split(':')
-        amLastTime = 10
+        amLastTime = 11
       }
-      if (Number(tmp2[0]) >= 0 && Number(tmp2[0]) < 3) {
+      if (Number(tmp2[0]) >= 0 && Number(tmp2[0]) < 3) { // 下班时间是第二天的凌晨 没有上班
         return -1
       }
-      if (Number(tmp1[0]) > amLastTime && Number(tmp1[0]) < 14) {
+      if (Number(tmp1[0]) > amLastTime && Number(tmp1[0]) < 14) { // 上班时间在9-14点/11-14点 迟到
         return 2
-      } else if (Number(tmp1[0]) == amLastTime) {
-        if (Number(tmp1[1]) > 36) return 2
-        else if (Number(tmp1[1]) > 30) return 1
+      } else if (Number(tmp1[0]) == amLastTime) { // 上班时间 == 9 / 11点
+        if (Number(tmp1[1]) > 36) return 2  // 分钟大于36 迟到
+        else if (
+          (Number(tmp2[0]) >= 14 && Number(tmp2[0]) < 18) ||
+          (Number(tmp2[0]) == 18 && Number(tmp2[1]) < 30)
+        ) return 2 // 下班时间早于6.30 早退 
+        else return 1 // 5分钟内
       }
       if (Number(tmp1[0]) >= 14) {
-        return 3
+        return 3  // 上班时间大于14点 补卡
       }
       if (
         (Number(tmp2[0]) >= 14 && Number(tmp2[0]) < 18) ||
         (Number(tmp2[0]) == 18 && Number(tmp2[1]) < 30)
-      ) {
+      ) { // 下班时间早于6.30 早退 
         return 2
-      } else if (Number(tmp2[0]) < 14) {
+      } else if (Number(tmp2[0]) < 14) {  // 下班时间小于14点 补卡
         return 3
       }
       return 0
